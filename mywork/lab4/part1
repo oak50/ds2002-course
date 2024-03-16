@@ -1,0 +1,9 @@
+#!/bin/bash
+
+curl https://cdn.britannica.com/34/235834-050-C5843610/two-different-breeds-of-cats-side-by-side-outdoors-in-the-garden.jpg > cats.png
+
+aws s3 cp cats.png s3://ds-2002-fpt9nh/
+
+aws s3 presign --expires-in 604800 s3://ds-2002-fpt9nh/cats.png
+
+https://ds-2002-fpt9nh.s3.us-east-1.amazonaws.com/cats.png?X-Amz-Algorithm=AWS4$

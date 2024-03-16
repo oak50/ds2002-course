@@ -1,0 +1,23 @@
+#!/usr/bin/python3
+import requests
+import boto3
+s3 = boto3.client('s3', region_name='us-east-1')
+homer.gif = requests.get('https://user-images.githubusercontent.com/14011726/94132137-7d4fc100-fe7c-11ea-8512-69f90cb65e48.gif')
+
+bucket = 'ds-2002-fpt9nh'
+local_file = 'project/homer.gif'
+
+resp = s3.put_object(
+    Body = local_file,
+    Bucket = bucket,
+    Key = local_file)
+
+bucket_name = ‘ds-2002-fpt9nh’
+object_name = ‘homer.gif’
+expires_in = 604800
+
+response = s3.generate_presigned_url(
+    'get_object',
+    Params={'ds-2002-fpt9nh': bucket_name, 'homer.gif': object_name},
+    604800=expires_in
+    )
